@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OrderFood</string>
+    <string name="no_internet">No internet connection available!</string>
+    <string name="error_no_internet_connection">No internet connection!</string>
+    <string name="something_unexpected">Something unexpected has happened</string>
+
+
+
+    <string name="search_your_recipes">Search Your Recipes…</string>
+    <string name="meal_categories">Meal Categories</string>
+</resources>
