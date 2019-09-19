@@ -12,7 +12,7 @@ public class BaseViewModel extends ViewModel {
    /* private WeakReference<T> mNavigator;*/
     private final MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();
     private WebService webClient;
-    private SchedulersFacade schedulersFacade;
+    private SchedulersFacade schedulersFacade ;
 
 
     public BaseViewModel(WebService webService, SchedulersFacade schedulersFacade) {

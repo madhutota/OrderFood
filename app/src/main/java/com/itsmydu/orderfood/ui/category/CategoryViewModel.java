@@ -12,12 +12,14 @@ import io.reactivex.disposables.CompositeDisposable;
 public class CategoryViewModel extends BaseViewModel {
 
     private final CompositeDisposable disposables = new CompositeDisposable();
+    WebService webService;
 
     private MutableLiveData<Response> categoryResponse = new MutableLiveData<>();
 
 
     public CategoryViewModel(WebService webService, SchedulersFacade schedulersFacade) {
         super(webService, schedulersFacade);
+        this.webService = webService;
     }
 
     public MutableLiveData<Response> getCategoryResponse() {
@@ -31,7 +33,7 @@ public class CategoryViewModel extends BaseViewModel {
 
 
     public void getMealByCategory(String categoryName) {
-        disposables.add(getWebClient().getMealsByCategory(categoryName)
+        disposables.add(webService.getMealsByCategory(categoryName)
                 .subscribeOn(getSchedulersFacade().io())
                 .observeOn(getSchedulersFacade().ui())
                 .doOnSubscribe(__ -> categoryResponse.setValue(Response.loading()))

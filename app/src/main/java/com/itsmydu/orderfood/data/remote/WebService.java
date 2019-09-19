@@ -19,7 +19,7 @@ public interface WebService {
     Observable<JsonElement> getCategories();
 
     @GET("filter.php")
-    Observable<Meals>getMealsByCategory(@Query("c")String category);
+    Observable<JsonElement>getMealsByCategory(@Query("c")String category);
 
 
 

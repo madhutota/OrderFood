@@ -22,6 +22,42 @@ public class Meals {
         @SerializedName("idMeal")
         @Expose
         private String idMeal;
+
+        @SerializedName("strMeal")
+        @Expose
+        private String strMeal;
+
+        @SerializedName("strMealThumb")
+        @Expose
+        private String strMealThumb;
+
+        public String getIdMeal() {
+            return idMeal;
+        }
+
+        public void setIdMeal(String idMeal) {
+            this.idMeal = idMeal;
+        }
+
+        public String getStrMeal() {
+            return strMeal;
+        }
+
+        public void setStrMeal(String strMeal) {
+            this.strMeal = strMeal;
+        }
+
+        public String getStrMealThumb() {
+            return strMealThumb;
+        }
+
+        public void setStrMealThumb(String strMealThumb) {
+            this.strMealThumb = strMealThumb;
+        }
+
+        /* @SerializedName("idMeal")
+        @Expose
+        private String idMeal;
         @SerializedName("strMeal")
         @Expose
         private String strMeal;
@@ -171,7 +207,7 @@ public class Meals {
         private String strSource;
         @SerializedName("dateModified")
         @Expose
-        private Object dateModified;
+        private String dateModified;
 
         public String getIdMeal() {
             return idMeal;
@@ -573,13 +609,12 @@ public class Meals {
             this.strSource = strSource;
         }
 
-        public Object getDateModified() {
+        public String getDateModified() {
             return dateModified;
         }
 
-        public void setDateModified(Object dateModified) {
+        public void setDateModified(String dateModified) {
             this.dateModified = dateModified;
-        }
-
+        }*/
     }
 }

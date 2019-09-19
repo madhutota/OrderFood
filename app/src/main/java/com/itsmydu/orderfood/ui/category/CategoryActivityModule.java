@@ -9,6 +9,7 @@ import com.itsmydu.orderfood.ui.main.MainActivityViewModel;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.android.ContributesAndroidInjector;
 
 
 @Module
@@ -22,5 +23,7 @@ public class CategoryActivityModule {
     CategoryViewModel provideCategotyViewModel(WebService apiService, SchedulersFacade schedulersFacade) {
         return new CategoryViewModel(apiService,schedulersFacade);
     }
+
+
 
 }

@@ -15,8 +15,9 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasFragmentInjector;
 import dagger.android.HasServiceInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class FoodApp  extends Application implements HasActivityInjector, HasServiceInjector , HasFragmentInjector {
+public class FoodApp  extends Application implements HasActivityInjector, HasServiceInjector,HasFragmentInjector, HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
@@ -25,6 +26,13 @@ public class FoodApp  extends Application implements HasActivityInjector, HasSer
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentInjecter;
+
+    @Inject
+    DispatchingAndroidInjector<android.support.v4.app.Fragment> FragmentDispatchingAndroidInjector;
+
+   /* @Inject
+    DispatchingAndroidInjector<android.support.v4.app.Fragment> supportfragmentInjecter;*/
+
     public static FoodApp mInstance;
 
 
@@ -35,7 +43,7 @@ public class FoodApp  extends Application implements HasActivityInjector, HasSer
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
+      //  mInstance = this;
 
         DaggerAppComponent
                 .builder()
@@ -58,4 +66,19 @@ public class FoodApp  extends Application implements HasActivityInjector, HasSer
     public AndroidInjector<Fragment> fragmentInjector() {
         return fragmentInjecter;
     }
+
+    @Override
+    public AndroidInjector<android.support.v4.app.Fragment> supportFragmentInjector() {
+        return FragmentDispatchingAndroidInjector;
+    }
+
+   /* @Override
+    public AndroidInjector<android.support.v4.app.Fragment> supportFragmentInjector() {
+        return supportfragmentInjecter;
+    }
+*/
+   /* @Override
+    public AndroidInjector<android.support.v4.app.Fragment> supportFragmentInjector() {
+        return fragmentInjecter;
+    }*/
 }

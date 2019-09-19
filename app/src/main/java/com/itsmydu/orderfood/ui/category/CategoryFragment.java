@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.itsmydu.orderfood.data.Response;
 import com.itsmydu.orderfood.data.model.Meals;
+import com.itsmydu.orderfood.di.ViewModelProviderFactory;
 import com.itsmydu.readme.R;
 import com.squareup.picasso.Picasso;
 
@@ -31,11 +32,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 public class CategoryFragment extends Fragment {
 
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
+
     private CategoryViewModel categoryViewModel;
 
     @BindView(R.id.recyclerView)
@@ -50,20 +54,23 @@ public class CategoryFragment extends Fragment {
     TextView textCategory;
 
     AlertDialog.Builder descDialog;
+    @Inject
+    Gson gson;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        AndroidSupportInjection.inject(this);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
+
         ButterKnife.bind(this, view);
 
-       // categoryViewModel = ViewModelProviders.of(this, mViewModelFactory).get(CategoryViewModel.class);
+        categoryViewModel = ViewModelProviders.of(this, mViewModelFactory).get(CategoryViewModel.class);
         return view;
     }
 
@@ -79,8 +86,8 @@ public class CategoryFragment extends Fragment {
                     .setMessage(getArguments().getString("EXTRA_DATA_DESC"));
 
 
-            /*categoryViewModel.getMealByCategory(getArguments().getString("EXTRA_DATA_NAME"));
-            categoryViewModel.getCategoryResponse().observe(this, this::categoryResponse);*/
+            categoryViewModel.getMealByCategory(getArguments().getString("EXTRA_DATA_NAME"));
+            categoryViewModel.getCategoryResponse().observe(this, this::categoryResponse);
         }
     }
 
@@ -90,8 +97,7 @@ public class CategoryFragment extends Fragment {
             case LOADING:
                 break;
             case SUCCESS:
-                Meals meals = new Gson().fromJson(response.data, new TypeToken<Meals>() {
-                }.getType());
+                Meals meals = new Gson().fromJson(response.data, new TypeToken<Meals>() {}.getType());
                 setMeals(meals.getMeals());
                 break;
             case ERROR:

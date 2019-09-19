@@ -35,7 +35,9 @@ public class MainActivityViewModel extends BaseViewModel {
         disposables.add(getWebClient().getMeal()
                 .subscribeOn(getSchedulersFacade().io())
                 .observeOn(getSchedulersFacade().ui())
-                .doOnSubscribe(__ -> mealResponse.setValue(Response.loading()))
+                .doOnSubscribe(__ -> {
+                    mealResponse.setValue(Response.loading());
+                })
                 .subscribe(
                         greeting -> mealResponse.setValue(Response.success(greeting.toString())),
                         throwable -> mealResponse.setValue(Response.error(throwable.getMessage()))
